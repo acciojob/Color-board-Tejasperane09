@@ -1,16 +1,59 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-	<link rel="stylesheet" href="styles.css">
-</head>
+<style>
+  .container {
+    display: grid;
+    grid-template-columns: repeat(40, 20px); /* 40 x 20px = 800 boxes */
+    gap: 2px;
+    width: max-content;
+    margin: 20px auto;
+  }
 
+  .square {
+    width: 20px;
+    height: 20px;
+    background-color: #ddd;
+    transition: background-color 1s ease; /* Smooth fade out */
+  }
+</style>
+</head>
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
+
+<div class="container" id="board"></div>
+
+<script>
+  const container = document.getElementById("board");
+
+  // Create 800 squares
+  for (let i = 0; i < 800; i++) {
+    const square = document.createElement("div");
+    square.classList.add("square");
+
+    // Add hover behavior
+    square.addEventListener("mouseenter", () => {
+      const randomColor = getRandomColor();
+      square.style.backgroundColor = randomColor;
+
+      // Remove color after 1 second smoothly
+      setTimeout(() => {
+        square.style.backgroundColor = "#ddd";
+      }, 1000);
+    });
+
+    container.appendChild(square);
+  }
+
+  // Function to generate random color
+  function getRandomColor() {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
 </script>
 
 </body>
-
 </html>
